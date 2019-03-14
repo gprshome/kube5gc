@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-free5gc-deployment
+  namespace: free5gc
+  labels:
+    app: free5gc-mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: free5gc-mongo
+  template:
+    metadata:
+      labels:
+        app: free5gc-mongo
+    spec:
+      containers:
+      - image: cewuandy/nextepc-mongodb
+        name: nextepc-mongo
+        ports:
+        - containerPort: 27017
+          name: mongo
+        volumeMounts:
+        - name: mongo-persistent-storage
+          mountPath: /data/db
+      volumes:
+      - name: mongo-persistent-storage
+        persistentVolumeClaim:
+          claimName: mongo-pv-claim

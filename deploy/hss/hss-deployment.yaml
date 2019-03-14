@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hss-free5gc-deployment
+  namespace: free5gc
+  labels:
+    app: free5gc-hss
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: free5gc-hss
+  template:
+    metadata:
+      labels:
+        app: free5gc-hss
+      annotations:
+        cni.projectcalico.org/ipAddrs: "[\"192.168.0.4\"]"
+    spec:
+      containers:
+      - name: free5gc-hss
+        image: tw0927041027/free5gc-base:latest
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/bash"]
+        args: ["-c", "/root/kube5gc/docker/free5gc/install/bin/nextepc-hssd"]
+        ports:
+        - containerPort: 80
+        env:
+        - name: DB_URI
+            value: mongodb://mongodb-svc/free5gc
+        volumeMounts:
+        - name: config-volume
+          mountPath: /root/kube5gc/docker/free5gc/install/etc/free5gc/
+        - name: freediameter-volume
+          mountPath: /root/kube5gc/docker/free5gc/install/etc/free5gc/freediameter
+        securityContext:
+          privileged: true
+          capabilities:
+            add: ["NET_ADMIN", "SYS_TIME"]
+      initContainers:
+      - name: init-network-client
+        image: sdnvortex/network-controller:v0.4.9
+        command: ["/go/bin/client"]
+        args: ["-s=unix:///tmp/vortex.sock", "-b=br0", "-n=eth1", "-i=192.188.2.3/24"]
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: POD_UUID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.uid
+        volumeMounts:
+        - mountPath: /tmp/
+          name: grpc-sock
+      securityContext:
+        sysctls:
+        - name: net.ipv6.conf.all.disable_ipv6
+          value: "0"
+      volumes:
+      - name: grpc-sock
+        hostPath:
+          path: /tmp/vortex/
+      - name: config-volume
+        configMap:
+          name: hss-config
+          items:
+          - key: config.file
+            path: hss.conf
+      - name: freediameter-volume
+        configMap:
+          name: freediameter-hss-config
+          items:
+          - key: config.file
+            path: hss.conf
