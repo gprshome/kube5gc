@@ -14,8 +14,6 @@ spec:
     metadata:
       labels:
         app: free5gc-upf
-      annotations:
-        cni.projectcalico.org/ipAddrs: "[\"192.168.0.8\"]"
     spec:
       containers:
       - name: free5gc-upf
@@ -39,7 +37,7 @@ spec:
       - name: init-network-client
         image: sdnvortex/network-controller:v0.4.9
         command: ["/go/bin/client"]
-        args: ["-s=unix:///tmp/vortex.sock", "-b=br0", "-n=eth1", "-i=192.188.2.5/24"]
+        args: ["-s=unix:///tmp/vortex.sock", "-b=br0", "-n=eth1", "-i=192.188.2.6/24"]
         env:
         - name: POD_NAME
           valueFrom:
@@ -56,17 +54,13 @@ spec:
         volumeMounts:
         - mountPath: /tmp/
           name: grpc-sock
-      securityContext:
-        sysctls:
-        - name: net.ipv6.conf.all.disable_ipv6
-          value: "0"
       volumes:
       - name: grpc-sock
         hostPath:
           path: /tmp/vortex/
       - name: config-volume
         configMap:
-          name: upf-conf
+          name: free5gc-config
             items:
             - key: config.file
-              path: upf.conf
+              path: free5gc.conf

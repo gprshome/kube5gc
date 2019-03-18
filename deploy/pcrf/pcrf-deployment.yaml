@@ -14,8 +14,6 @@ spec:
     metadata:
       labels:
         app: free5gc-pcrf
-      annotations:
-        cni.projectcalico.org/ipAddrs: "[\"192.168.0.5\"]"
     spec:
       containers:
       - name: free5gc-pcrf
@@ -23,8 +21,6 @@ spec:
         imagePullPolicy: IfNotPresent
         command: ["/bin/bash"]
         args: ["-c", "/root/kube5gc/docker/free5gc/install/bin/nextepc-pcrfd"]
-        ports:
-        - containerPort: 80
         env:
         - name: DB_URI
           value: mongodb://mongodb-svc/free5gc
@@ -37,15 +33,11 @@ spec:
           privileged: true
           capabilities:
             add: ["NET_ADMIN", "SYS_TIME"]
-      securityContext:
-        sysctls:
-        - name: net.ipv6.conf.all.disable_ipv6
-          value: "0"
       initContainers:
       - name: init-network-client
         image: sdnvortex/network-controller:v0.4.9
         command: ["/go/bin/client"]
-        args: ["-s=uxin:///tmp/vortex.sock", "-b=br0", "-n=eth1", "-i=192.168.2.5/24"]
+        args: ["-s=uxin:///tmp/vortex.sock", "-b=br0", "-n=eth1", "-i=192.188.2.5/24"]
         env:
         - name: POD_NAME
           valueFrom:

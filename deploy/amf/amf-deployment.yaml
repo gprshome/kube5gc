@@ -14,17 +14,13 @@ spec:
     metadata:
       labels:
         app: free5gc-amf
-      annotations:
-        cni.projectcalico.org/ipAddrs: "[\"192.168.0.2\"]"
     spec:
       containers:
       - name: free5gc-amf
         image: tw0927041027/free5gc-base:latest
         imagePullPolicy: IfNotPresent
         command: ["/bin/bash"]
-        args: ["-c", "/root/kube5gc/docker/free5gc/install/bin/nextepc-amfd"]
-        ports:
-        - containerPort: 80
+        args: ["-c", "/root/kube5gc/docker/free5gc/install/bin/free5gc-amfd"]
         env:
         - name: DB_URI
           value: mongodb://mongodb-svc/free5gc
@@ -58,20 +54,16 @@ spec:
         volumeMounts:
         - mountPath: /tmp/
           name: grpc-sock
-      securityContext:
-        sysctls:
-        - name: net.ipv6.conf.all.disable_ipv6
-          value: "0"
       volumes:
       - name: grpc-sock
         hostPath:
           path: /tmp/vortex/
       - name: config-volume
         configMap:
-          name: amf-config
+          name: free5gc-config
           items:
           - key: config.file
-            path: amf.conf
+            path: free5gc.conf
       - name: freediameter-volume
         configMap:
           name: freediameter-amf-config

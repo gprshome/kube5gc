@@ -14,8 +14,6 @@ spec:
     metadata:
       labels:
         app: free5gc-hss
-      annotations:
-        cni.projectcalico.org/ipAddrs: "[\"192.168.0.4\"]"
     spec:
       containers:
       - name: free5gc-hss
@@ -23,8 +21,6 @@ spec:
         imagePullPolicy: IfNotPresent
         command: ["/bin/bash"]
         args: ["-c", "/root/kube5gc/docker/free5gc/install/bin/nextepc-hssd"]
-        ports:
-        - containerPort: 80
         env:
         - name: DB_URI
             value: mongodb://mongodb-svc/free5gc
@@ -41,7 +37,7 @@ spec:
       - name: init-network-client
         image: sdnvortex/network-controller:v0.4.9
         command: ["/go/bin/client"]
-        args: ["-s=unix:///tmp/vortex.sock", "-b=br0", "-n=eth1", "-i=192.188.2.3/24"]
+        args: ["-s=unix:///tmp/vortex.sock", "-b=br0", "-n=eth1", "-i=192.188.2.4/24"]
         env:
         - name: POD_NAME
           valueFrom:
@@ -58,10 +54,6 @@ spec:
         volumeMounts:
         - mountPath: /tmp/
           name: grpc-sock
-      securityContext:
-        sysctls:
-        - name: net.ipv6.conf.all.disable_ipv6
-          value: "0"
       volumes:
       - name: grpc-sock
         hostPath:

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: freediameter-amf-conf
+  name: freediameter-amf-config
   namespace: free5gc
 data:
   config.file: |
@@ -87,7 +87,7 @@ data:
     #ListenOn = "202.249.37.5";
     #ListenOn = "2001:200:903:2::202:1";
     #ListenOn = "fe80::21c:5ff:fe98:7d62%eth0";
-    ListenOn = "192.168.0.2";
+    ListenOn = "192.188.2.2";
     
     
     ##############################################################
@@ -269,7 +269,7 @@ data:
     # Examples:
     #ConnectPeer = "aaa.wide.ad.jp";
     #ConnectPeer = "old.diameter.serv" { TcTimer = 60; TLS_old_method; No_SCTP; Port=3868; } ;
-    ConnectPeer = "hss.localdomain" { ConnectTo = "192.168.0.4"; No_TLS; };
+    ConnectPeer = "hss.localdomain" { ConnectTo = "192.188.2.4"; No_TLS; };
     
     
     ##############################################################
