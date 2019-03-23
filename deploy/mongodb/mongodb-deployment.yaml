@@ -16,8 +16,8 @@ spec:
         app: free5gc-mongo
     spec:
       containers:
-      - image: cewuandy/nextepc-mongodb
-        name: nextepc-mongo
+      - image: tw0927041027/free5gc-mongodb
+        name: free5gc-mongo
         ports:
         - containerPort: 27017
           name: mongo

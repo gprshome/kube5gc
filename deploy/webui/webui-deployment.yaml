@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: free5gc-webui
+  namespace: free5gc
+  labels:
+    app: free5gc-webui
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: free5gc-webui
+  template:
+    metadata:
+      labels:
+        app: free5gc-webui
+    spec:
+      containers:
+      - name: free5gc-webui
+        image: tw0927041027/free5gc-webui
+        ports:
+        - containerPort: 3000
