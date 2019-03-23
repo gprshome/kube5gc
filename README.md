@@ -30,7 +30,8 @@ docker run -ti -d --privileged --net free5gc --ip 192.188.2.3 --name smf tw09270
 docker run -ti -d --privileged --net free5gc --ip 192.188.2.4 --name hss tw0927041027/free5gc-base bash
 docker run -ti -d --privileged --net free5gc --ip 192.188.2.5 --name pcrf tw0927041027/free5gc-base bash
 docker run -ti -d --privileged --net free5gc --ip 192.188.2.6 --name upf tw0927041027/free5gc-base bash
-docker run -ti -d --net free5gc --ip 192.188.2.100 --name mongodb ubuntu bash
+docker run -ti -d --net free5gc --ip 192.188.2.100 --name mongodb tw0927041027/free5gc-mongodb bash
+docker run -ti -d --net free5gc --ip 192.188.2.101 --name webui tw0927041027/free5gc-webui bash
 ```
 
 ### Editing the configuration files
@@ -48,6 +49,8 @@ docker cp ./pcrf.conf pcrf:/root/free5gc/install/etc/free5gc/freeDiameter/pcrf.c
 
 ### Running and testing
 ```sh
+docker exec -ti mongodb bash
+/etc/init.d/mongodb start
 docker exec -ti amf bash
 echo 192.188.2.100 mongodb-svc >> /etc/hosts && /root/free5gc/install/bin/free5gc-amfd &
 docker exec -ti smf bash
@@ -58,4 +61,6 @@ docker exec -ti pcrf bash
 echo 192.188.2.100 mongodb-svc >> /etc/hosts && /root/free5gc/install/bin/nextepc-pcrfd &
 docker exec -ti upf bash
 echo 192.188.2.100 mongodb-svc >> /etc/hosts && /root/free5gc/install/bin/free5gc-upfd &
+docker exec -ti webui bash
+cd /root/free5gc/webui && npm run dev
 ```
