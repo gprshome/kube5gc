@@ -9,7 +9,7 @@ data:
     db_uri: mongodb://mongodb-svc/free5gc
     
     logger:
-        file: /root/kube5gc/docker/free5gc/install/var/log/free5gc/free5gc.log
+        file: /root/free5gc/install/var/log/free5gc/free5gc.log
         trace: 
             app: 1
             s1ap: 1
@@ -379,7 +379,7 @@ data:
     # Default : NO DEFAULT
     #TLS_Cred = "<x509 certif file.PEM>" , "<x509 private key file.PEM>";
     #TLS_Cred = "/etc/ssl/certs/freeDiameter.pem", "/etc/ssl/private/freeDiameter.key";
-    TLS_Cred = "/root/kube5gc/docker/free5gc/install/etc/free5gc/freeDiameter/amf.cert.pem", "/root/kube5gc/docker/free5gc/install/etc/free5gc/freeDiameter/amf.key.pem";
+    TLS_Cred = "/root/free5gc/install/etc/free5gc/freeDiameter/amf.cert.pem", "/root/free5gc/install/etc/free5gc/freeDiameter/amf.key.pem";
     
     # Certificate authority / trust anchors
     # The file containing the list of trusted Certificate Authorities (PEM list)
@@ -387,7 +387,7 @@ data:
     # The directive can appear several times to specify several files.
     # Default : GNUTLS default behavior
     #TLS_CA = "<file.PEM>";
-    TLS_CA = "/root/kube5gc/docker/free5gc/install/etc/free5gc/freeDiameter/cacert.pem";
+    TLS_CA = "/root/free5gc/install/etc/free5gc/freeDiameter/cacert.pem";
     
     # Certificate Revocation List file
     # The information about revoked certificates.
@@ -648,7 +648,7 @@ data:
     # Default : NO DEFAULT
     #TLS_Cred = "<x509 certif file.PEM>" , "<x509 private key file.PEM>";
     #TLS_Cred = "/etc/ssl/certs/freeDiameter.pem", "/etc/ssl/private/freeDiameter.key";
-    TLS_Cred = "/root/kube5gc/docker/free5gc/install/etc/free5gc/freeDiameter/smf.cert.pem", "/root/kube5gc/docker/free5gc/install/etc/free5gc/freeDiameter/smf.key.pem";
+    TLS_Cred = "/root/free5gc/install/etc/free5gc/freeDiameter/smf.cert.pem", "/root/free5gc/install/etc/free5gc/freeDiameter/smf.key.pem";
     
     # Certificate authority / trust anchors
     # The file containing the list of trusted Certificate Authorities (PEM list)
@@ -656,7 +656,7 @@ data:
     # The directive can appear several times to specify several files.
     # Default : GNUTLS default behavior
     #TLS_CA = "<file.PEM>";
-    TLS_CA = "/root/kube5gc/docker/free5gc/install/etc/free5gc/freeDiameter/cacert.pem";
+    TLS_CA = "/root/free5gc/install/etc/free5gc/freeDiameter/cacert.pem";
     
     # Certificate Revocation List file
     # The information about revoked certificates.
@@ -916,7 +916,7 @@ data:
     # Default : NO DEFAULT
     #TLS_Cred = "<x509 certif file.PEM>" , "<x509 private key file.PEM>";
     #TLS_Cred = "/etc/ssl/certs/freeDiameter.pem", "/etc/ssl/private/freeDiameter.key";
-    TLS_Cred = "/root/kube5gc/docker/free5gc/install/etc/free5gc/freeDiameter/hss.cert.pem", "/root/kube5gc/docker/free5gc/install/etc/free5gc/freeDiameter/hss.key.pem";
+    TLS_Cred = "/root/free5gc/install/etc/free5gc/freeDiameter/hss.cert.pem", "/root/free5gc/install/etc/free5gc/freeDiameter/hss.key.pem";
     
     # Certificate authority / trust anchors
     # The file containing the list of trusted Certificate Authorities (PEM list)
@@ -924,7 +924,7 @@ data:
     # The directive can appear several times to specify several files.
     # Default : GNUTLS default behavior
     #TLS_CA = "<file.PEM>";
-    TLS_CA = "/root/kube5gc/docker/free5gc/install/etc/free5gc/freeDiameter/cacert.pem";
+    TLS_CA = "/root/free5gc/install/etc/free5gc/freeDiameter/cacert.pem";
     
     # Certificate Revocation List file
     # The information about revoked certificates.
@@ -1184,7 +1184,7 @@ data:
     # Default : NO DEFAULT
     #TLS_Cred = "<x509 certif file.PEM>" , "<x509 private key file.PEM>";
     #TLS_Cred = "/etc/ssl/certs/freeDiameter.pem", "/etc/ssl/private/freeDiameter.key";
-    TLS_Cred = "/root/kube5gc/docker/free5gc/install/etc/free5gc/freeDiameter/pcrf.cert.pem", "/root/kube5gc/docker/free5gc/install/etc/free5gc/freeDiameter/pcrf.key.pem";
+    TLS_Cred = "/root/free5gc/install/etc/free5gc/freeDiameter/pcrf.cert.pem", "/root/free5gc/install/etc/free5gc/freeDiameter/pcrf.key.pem";
     
     # Certificate authority / trust anchors
     # The file containing the list of trusted Certificate Authorities (PEM list)
@@ -1192,7 +1192,7 @@ data:
     # The directive can appear several times to specify several files.
     # Default : GNUTLS default behavior
     #TLS_CA = "<file.PEM>";
-    TLS_CA = "/root/kube5gc/docker/free5gc/install/etc/free5gc/freeDiameter/cacert.pem";
+    TLS_CA = "/root/free5gc/install/etc/free5gc/freeDiameter/cacert.pem";
     
     # Certificate Revocation List file
     # The information about revoked certificates.

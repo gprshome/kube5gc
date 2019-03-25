@@ -60,6 +60,6 @@ spec:
       - name: config-volume
         configMap:
           name: free5gc-config
-            items:
-            - key: free5gc.conf
-              path: free5gc.conf
+          items:
+          - key: free5gc.conf
+            path: free5gc.conf

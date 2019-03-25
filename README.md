@@ -1,5 +1,47 @@
 # kube5gc
 
+> on Kubernetes
+
+### Install OVS on node host and Add interface to OVS
+```sh
+apt install openvswitch-switch
+ovs-vsctl add-br br0
+ovs-vsctl add-port br0 enp5s2
+```
+
+### Create Daemonset
+```sh
+kubectl create -f kube5gc/deploy/namespace
+```
+
+### Create Namespace
+```sh
+kubectl create namespace free5gc
+```
+
+### Create mongodb
+```sh
+cd kube5gc/deploy/mongodb
+kubectl create -f .
+```
+
+### Create free5gc
+```sh
+cd kube5gc/deploy/
+kubectl apply -f .
+```
+
+### Create webui
+```sh
+cd kube5gc/deploy/webui
+kubectl create -f .
+```
+
+### Check Pod
+```sh
+watch kubectl get pod -n free5gc
+```
+
 > on Docker
 
 ### Install Docker
@@ -31,7 +73,7 @@ docker run -ti -d --privileged --net free5gc --ip 192.188.2.4 --name hss tw09270
 docker run -ti -d --privileged --net free5gc --ip 192.188.2.5 --name pcrf tw0927041027/free5gc-base bash
 docker run -ti -d --privileged --net free5gc --ip 192.188.2.6 --name upf tw0927041027/free5gc-base bash
 docker run -ti -d --net free5gc --ip 192.188.2.100 --name mongodb tw0927041027/free5gc-mongodb bash
-docker run -ti -d --net free5gc --ip 192.188.2.101 --name webui tw0927041027/free5gc-webui bash
+docker run -ti -d -p 3000:3000 --net free5gc --ip 192.188.2.101 --name webui tw0927041027/free5gc-webui bash
 ```
 
 ### Editing the configuration files
@@ -62,5 +104,5 @@ echo 192.188.2.100 mongodb-svc >> /etc/hosts && /root/free5gc/install/bin/nextep
 docker exec -ti upf bash
 echo 192.188.2.100 mongodb-svc >> /etc/hosts && /root/free5gc/install/bin/free5gc-upfd &
 docker exec -ti webui bash
-cd /root/free5gc/webui && npm run dev
+echo 192.188.2.100 mongodb-svc >> /etc/hosts && cd /root/free5gc/webui && npm run dev &
 ```

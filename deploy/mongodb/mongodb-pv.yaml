@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: mongo-pv-volume
+  namespace: free5gc
   labels:
     type: local
 spec:

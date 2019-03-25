@@ -13,6 +13,8 @@ RUN apt-get update && \
     npm install && \
     grep -r "mongodb://localhost" | awk -F : '{print $1}' | xargs -i sed -i 's/localhost/mongodb-svc/g' {}
 
+WORKDIR /root/free5gc/webui
+
 CMD npm run dev
 
 EXPOSE 3000
