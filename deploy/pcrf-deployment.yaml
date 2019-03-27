@@ -19,7 +19,7 @@ spec:
       - name: free5gc-pcrf
         image: tw0927041027/free5gc-base:latest
         imagePullPolicy: Always
-        command: ["/bin/bash"]
+        command: ["/bin/sh"]
         args: ["-c", "/root/free5gc/install/bin/nextepc-pcrfd"]
         env:
         - name: DB_URI

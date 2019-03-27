@@ -19,7 +19,7 @@ spec:
       - name: free5gc-hss
         image: tw0927041027/free5gc-base:latest
         imagePullPolicy: Always
-        command: ["/bin/bash"]
+        command: ["/bin/sh"]
         args: ["-c", "/root/free5gc/install/bin/nextepc-hssd"]
         env:
         - name: DB_URI

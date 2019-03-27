@@ -19,12 +19,14 @@ spec:
       - name: free5gc-upf
         image: tw0927041027/free5gc-base:latest
         imagePullPolicy: Always
-        command: ["/bin/bash"]
-        args: ["-c", "/root/free5gc/install/bin/free5gc-upfd"]
+        command: ["/bin/sh"]
+        args: ["-c", "/root/free5gc/setup-uptun.sh && sh -c /root/free5gc/install/bin/free5gc-upfd"]
         env:
         - name: DB_URI
           value: mongodb://mongodb-svc/free5gc
         volumeMounts:
+        - mountPath: /dev/net/tun
+          name: tun-volume
         - name: config-volume
           mountPath: /root/free5gc/install/etc/free5gc/free5gc.conf
           subPath: free5gc.conf
@@ -57,6 +59,9 @@ spec:
       - name: grpc-sock
         hostPath:
           path: /tmp/vortex/
+      - name: tun-volume
+        hostPath:
+          path: /dev/net/tun
       - name: config-volume
         configMap:
           name: free5gc-config
