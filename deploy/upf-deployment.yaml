@@ -20,7 +20,7 @@ spec:
         image: tw0927041027/free5gc-base:latest
         imagePullPolicy: Always
         command: ["/bin/sh"]
-        args: ["-c", "/root/free5gc/setup-uptun.sh && sh -c /root/free5gc/install/bin/free5gc-upfd"]
+        args: ["-c", "chmod +x /root/free5gc/setup-uptun.sh && sh -c /root/free5gc/setup-uptun.sh && sh -c /root/free5gc/install/bin/free5gc-upfd"]
         env:
         - name: DB_URI
           value: mongodb://mongodb-svc/free5gc
