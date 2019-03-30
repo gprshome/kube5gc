@@ -33,8 +33,6 @@ spec:
           subPath: pcrf.conf
         securityContext:
           privileged: true
-          capabilities:
-            add: ["NET_ADMIN", "SYS_TIME"]
       initContainers:
       - name: init-network-client
         image: sdnvortex/network-controller:v0.4.9
